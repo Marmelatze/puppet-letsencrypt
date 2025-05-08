@@ -214,6 +214,15 @@ define letsencrypt::certonly (
         "--dns-linode-propagation-seconds ${letsencrypt::plugin::dns_linode::propagation_seconds}",
       ]
     }
+    'dns-desec': {
+      require letsencrypt::plugin::dns_desec
+      $_domains = join($domains, '\' -d \'')
+      $plugin_args  = [
+        "--cert-name '${cert_name}' -d '${_domains}'",
+        '--dns-desec',
+        "--dns-desec-credentials ${letsencrypt::plugin::dns_desec::config_path}",
+      ]
+    }
 
     'nginx': {
       require letsencrypt::plugin::nginx
@@ -225,6 +234,7 @@ define letsencrypt::certonly (
         $plugin_args = "--cert-name '${cert_name}'"
       }
     }
+
 
     default: {
       if $ensure == 'present' {
