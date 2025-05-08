@@ -9,6 +9,7 @@ type Letsencrypt::Plugin = Enum[
   'dns-google',
   'dns-cloudflare',
   'dns-linode',
+  'dns-desec',
   'dns-rfc2136',
   'manual',
 ]
