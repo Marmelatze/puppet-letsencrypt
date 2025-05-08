@@ -219,7 +219,6 @@ define letsencrypt::certonly (
       $_domains = join($domains, '\' -d \'')
       $plugin_args  = [
         "--cert-name '${cert_name}' -d '${_domains}'",
-        '--dns-desec',
         "--dns-desec-credentials ${letsencrypt::plugin::dns_desec::config_path}",
       ]
     }
